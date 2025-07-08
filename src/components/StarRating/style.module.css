@@ -1,0 +1,7 @@
+.starStyle {
+  display: flex;
+  width: 100px;
+  background-color: aliceblue;
+  border-style: solid;
+  border-radius: 5px;
+}

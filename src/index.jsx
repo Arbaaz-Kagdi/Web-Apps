@@ -1,4 +1,4 @@
-import "./global.css"
+import "./global.css";
 // Import some react tools
 import ReactDOM from "react-dom/client";
 // Import our first component : App
