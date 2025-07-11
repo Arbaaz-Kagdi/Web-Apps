@@ -5,7 +5,6 @@ import { BACKDROP_BASE_URL } from "./config";
 import { TvShowDetail } from "./components/TvShowDetail/TvShowDetail.jsx";
 import { Logo } from "./components/Logo/Logo.jsx";
 import logoImg from "./assets/images/icons8-tv-60.png";
-import { TVShowListItem } from "./components/TVShowListItem/TVShowListItem.jsx";
 import { TVShowList } from "./components/TVShowList/TVShowList.jsx";
 
 export function App() {
