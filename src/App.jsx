@@ -6,6 +6,7 @@ import { TvShowDetail } from "./components/TvShowDetail/TvShowDetail.jsx";
 import { Logo } from "./components/Logo/Logo.jsx";
 import logoImg from "./assets/images/icons8-tv-60.png";
 import { TVShowList } from "./components/TVShowList/TVShowList.jsx";
+import { SearchBar } from "./components/SearchBar/SearchBar.jsx";
 
 export function App() {
   const [currentTVShow, setCurrentTVShow] = useState();
@@ -24,6 +25,13 @@ export function App() {
     );
     if (recommendationListResp.length > 0) {
       setrecommendationList(recommendationListResp.slice(0, 10));
+    }
+  }
+
+  async function fetchByTitleFunc(title) {
+    const searchResponse = await TVShowAPI.fetchByTitle(title);
+    if (searchResponse.length > 0) {
+      setCurrentTVShow(searchResponse[0]);
     }
   }
 
@@ -60,7 +68,7 @@ export function App() {
             ></Logo>
           </div>
           <div className="col-md-12 col-lg-4">
-            <input style={{ width: "100%" }} type="text" />
+            <SearchBar onSubmit={fetchByTitleFunc}></SearchBar>
           </div>
         </div>
       </div>
