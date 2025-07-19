@@ -13,25 +13,37 @@ export function App() {
   const [recommendationList, setrecommendationList] = useState([]);
 
   async function fetchPopularFunc() {
-    const popularTVShowList = await TVShowAPI.fetchPopulars();
-    if (popularTVShowList.length > 0) {
-      setCurrentTVShow(popularTVShowList[0]);
+    try {
+      const popularTVShowList = await TVShowAPI.fetchPopulars();
+      if (popularTVShowList.length > 0) {
+        setCurrentTVShow(popularTVShowList[0]);
+      }
+    } catch (error) {
+      alert("Unable to Get TV Show");
     }
   }
 
   async function fetchRecommendationFunc(tvShowId) {
-    const recommendationListResp = await TVShowAPI.fetchRecommendations(
-      tvShowId
-    );
-    if (recommendationListResp.length > 0) {
-      setrecommendationList(recommendationListResp.slice(0, 10));
+    try {
+      const recommendationListResp = await TVShowAPI.fetchRecommendations(
+        tvShowId
+      );
+      if (recommendationListResp.length > 0) {
+        setrecommendationList(recommendationListResp.slice(0, 10));
+      }
+    } catch (error) {
+      alert("Unable to Get Recommended Shows");
     }
   }
 
   async function fetchByTitleFunc(title) {
-    const searchResponse = await TVShowAPI.fetchByTitle(title);
-    if (searchResponse.length > 0) {
-      setCurrentTVShow(searchResponse[0]);
+    try {
+      const searchResponse = await TVShowAPI.fetchByTitle(title);
+      if (searchResponse.length > 0) {
+        setCurrentTVShow(searchResponse[0]);
+      }
+    } catch (error) {
+      alert("Unable to Search");
     }
   }
 
