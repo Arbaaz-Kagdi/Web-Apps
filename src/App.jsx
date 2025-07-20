@@ -7,6 +7,7 @@ import { Logo } from "./components/Logo/Logo.jsx";
 import logoImg from "./assets/images/icons8-tv-60.png";
 import { TVShowList } from "./components/TVShowList/TVShowList.jsx";
 import { SearchBar } from "./components/SearchBar/SearchBar.jsx";
+import { Analytics } from "@vercel/analytics/react";
 
 export function App() {
   const [currentTVShow, setCurrentTVShow] = useState();
@@ -70,6 +71,7 @@ export function App() {
           : "black",
       }}
     >
+      <Analytics></Analytics>
       <div className={s.header}>
         <div className="row">
           <div className="col-4">
