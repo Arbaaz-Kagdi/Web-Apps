@@ -1,11 +1,18 @@
 import { Search as SearchIcon } from "react-bootstrap-icons";
 import s from "./style.module.css";
+import { useState } from "react";
 
 export function SearchBar({ onSubmit }) {
+  const [value, setValue] = useState("");
   function submit(e) {
     if (e.key === "Enter" && e.target.value.trim() !== "") {
       onSubmit(e.target.value);
+      setValue("");
     }
+  }
+
+  function handleChange(e) {
+    setValue(e.target.value);
   }
   return (
     <>
@@ -13,8 +20,10 @@ export function SearchBar({ onSubmit }) {
       <input
         className={s.input}
         type="text"
-        placeholder="Search a TV Show you may like"
+        placeholder="Search a TV Show"
         onKeyUp={submit}
+        value={value}
+        onChange={handleChange}
       ></input>
     </>
   );
