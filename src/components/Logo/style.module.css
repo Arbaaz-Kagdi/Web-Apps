@@ -1,5 +1,7 @@
 .flexContainer {
   display: flex;
+  cursor: pointer;
+  width: fit-content;
 }
 
 .img {
