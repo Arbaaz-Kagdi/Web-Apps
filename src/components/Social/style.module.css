@@ -1,0 +1,15 @@
+.flexContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
+.mail {
+  width: 35px;
+  height: 35px;
+}
+
+.gpay {
+  width: 35px;
+  height: 35px;
+}

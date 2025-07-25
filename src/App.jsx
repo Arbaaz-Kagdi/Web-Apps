@@ -8,6 +8,7 @@ import logoImg from "./assets/images/icons8-tv-60.png";
 import { TVShowList } from "./components/TVShowList/TVShowList.jsx";
 import { SearchBar } from "./components/SearchBar/SearchBar.jsx";
 import { Analytics } from "@vercel/analytics/react";
+import { Social } from "./components/Social/Social.jsx";
 
 export function App() {
   const [currentTVShow, setCurrentTVShow] = useState();
@@ -83,6 +84,9 @@ export function App() {
           </div>
           <div className="col-md-12 col-lg-4">
             <SearchBar onSubmit={fetchByTitleFunc}></SearchBar>
+          </div>
+          <div className="col-md-12 col-lg-4">
+            <Social></Social>
           </div>
         </div>
       </div>
