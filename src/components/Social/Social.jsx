@@ -18,13 +18,9 @@ export function Social() {
   };
 
   return (
-    <div className={s.flexContainer}>
+    <div className={isMobile ? s.flexMobileContainer : s.flexContainer}>
       {/* Email Icon */}
-      <a
-        href={`mailto:${email}`}
-        title="Drop a mail"
-        style={{ color: "#333", fontSize: "24px" }}
-      >
+      <a href={`mailto:${email}`} title="Drop a mail" className={s.link}>
         <img src={mail} alt="mail" className={s.mail} />
       </a>
 
@@ -33,7 +29,7 @@ export function Social() {
         href={upiUrl}
         onClick={handleUPIClick}
         title="Support Us"
-        style={{ color: "#333", fontSize: "24px" }}
+        className={s.link}
       >
         <img src={gpay} alt="mail" className={s.gpay} />
       </a>
