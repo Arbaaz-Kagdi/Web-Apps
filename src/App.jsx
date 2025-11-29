@@ -9,10 +9,12 @@ import { TVShowList } from "./components/TVShowList/TVShowList.jsx";
 import { SearchBar } from "./components/SearchBar/SearchBar.jsx";
 import { Analytics } from "@vercel/analytics/react";
 import { Social } from "./components/Social/Social.jsx";
+import { VideoPlayer } from "./components/VideoPlayer/VideoPlayer.jsx";
 
 export function App() {
   const [currentTVShow, setCurrentTVShow] = useState();
   const [recommendationList, setrecommendationList] = useState([]);
+  const [currentTrailerId, setCurrentTrailerId] = useState(null);
 
   async function fetchPopularFunc() {
     try {
@@ -46,6 +48,24 @@ export function App() {
       }
     } catch (error) {
       alert("Unable to Search");
+    }
+  }
+
+  async function playTrailer() {
+    if (currentTVShow) {
+      try {
+        const videos = await TVShowAPI.fetchVideos(currentTVShow.id);
+        const trailer = videos.find(
+          (video) => video.type === "Trailer" && video.site === "YouTube"
+        );
+        if (trailer) {
+          setCurrentTrailerId(trailer.key);
+        } else {
+          alert("No trailer found for this show");
+        }
+      } catch (error) {
+        alert("Unable to fetch trailer");
+      }
     }
   }
 
@@ -91,7 +111,12 @@ export function App() {
         </div>
       </div>
       <div className={s.tv_show_detail}>
-        {currentTVShow && <TvShowDetail tvShow={currentTVShow}></TvShowDetail>}
+        {currentTVShow && (
+          <TvShowDetail
+            tvShow={currentTVShow}
+            onWatchTrailer={playTrailer}
+          ></TvShowDetail>
+        )}
       </div>
       <div className={s.recommended_tv_shows}>
         {currentTVShow && (
@@ -101,6 +126,12 @@ export function App() {
           ></TVShowList>
         )}
       </div>
+      {currentTrailerId && (
+        <VideoPlayer
+          videoId={currentTrailerId}
+          onClose={() => setCurrentTrailerId(null)}
+        />
+      )}
     </div>
   );
 }

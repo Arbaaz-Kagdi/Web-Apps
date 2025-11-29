@@ -25,4 +25,11 @@ export class TVShowAPI {
     return response.data.results;
     // return MOCK_RECOMMENDATIONS;
   }
+
+  static async fetchVideos(tvShowId) {
+    const response = await axios.get(
+      `${BASE_URL}tv/${tvShowId}/videos?api_key=${import.meta.env.VITE_API_KEY_PARAM}`
+    );
+    return response.data.results;
+  }
 }
