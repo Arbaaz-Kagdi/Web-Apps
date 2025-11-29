@@ -4,15 +4,26 @@
   font-size: 20px;
 }
 
-.list:hover {
-  overflow: overlay;
-}
-
 .list {
   display: flex;
-  width: 100vw - 25px;
-  overflow-x: hidden;
+  width: 100%;
+  overflow-x: auto;
   padding-bottom: 30px;
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling on iOS */
+}
+
+.list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .tv_show_item {

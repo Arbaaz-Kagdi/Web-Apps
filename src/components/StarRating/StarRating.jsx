@@ -13,15 +13,15 @@ export function StarRating({ rating }) {
 
   // Push filled star icons
   for (let i = 1; i <= starFillCount; i++) {
-    starList.push(<StarFill key={"star-fill" + i}></StarFill>);
+    starList.push(<StarFill key={"star-fill" + i} size={20} />);
   }
   // Push half star icon if needed
   if (hasHalfStar) {
-    starList.push(<StarHalf key={"star-half"}></StarHalf>);
+    starList.push(<StarHalf key={"star-half"} size={20} />);
   }
   // Push empty half star icons
   for (let i = 1; i <= emptyStarCount; i++) {
-    starList.push(<StarEmpty key={"star-empty" + i}></StarEmpty>);
+    starList.push(<StarEmpty key={"star-empty" + i} size={20} />);
   }
 
   // Render star icon array

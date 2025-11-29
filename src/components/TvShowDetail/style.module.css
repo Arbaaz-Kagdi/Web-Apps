@@ -11,17 +11,27 @@
 /* .rating {
 } */
 
-.overview:hover {
-  overflow-y: auto;
-}
-
 .overview {
   font-family: Roboto;
   font-weight: 400;
   font-size: 20px;
   height: 120px;
-  overflow-y: hidden;
+  overflow-y: auto;
   margin-top: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.overview::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overview::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.overview::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .watch_trailer_btn {

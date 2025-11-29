@@ -1,7 +1,8 @@
 .starStyle {
   display: flex;
-  width: 100px;
-  background-color: aliceblue;
-  border-style: solid;
+  align-items: center;
+  gap: 2px;
+  background-color: white;
+  padding: 5px 8px;
   border-radius: 5px;
 }
