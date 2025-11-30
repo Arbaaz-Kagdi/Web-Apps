@@ -42,8 +42,11 @@
   border: none;
   border-radius: 5px;
   font-weight: bold;
+  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.2s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .watch_trailer_btn:hover {

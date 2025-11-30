@@ -12,13 +12,13 @@ export function TVShowListItem({ tvshow, onClick }) {
     <div className={s.container} onClick={onItemClick}>
       <img
         src={SMALL_IMG_COVER_BASE_URL + tvshow.backdrop_path}
-        alt={tvshow.name}
+        alt={tvshow.name || tvshow.title}
         className={s.img}
       />
       <div className={s.title}>
-        {tvshow.name.length > max_title_char
-          ? tvshow.name.slice(0, max_title_char) + "..."
-          : tvshow.name}
+        {(tvshow.name || tvshow.title).length > max_title_char
+          ? (tvshow.name || tvshow.title).slice(0, max_title_char) + "..."
+          : (tvshow.name || tvshow.title)}
       </div>
     </div>
   );

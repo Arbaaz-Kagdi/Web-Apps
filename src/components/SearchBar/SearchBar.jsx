@@ -15,7 +15,7 @@ export function SearchBar({ onSubmit }) {
     setValue(e.target.value);
   }
   return (
-    <>
+    <div className={s.container}>
       <SearchIcon size={27} className={s.icon}></SearchIcon>
       <input
         className={s.input}
@@ -25,6 +25,6 @@ export function SearchBar({ onSubmit }) {
         value={value}
         onChange={handleChange}
       ></input>
-    </>
+    </div>
   );
 }
