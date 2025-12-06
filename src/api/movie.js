@@ -27,4 +27,11 @@ export class MovieAPI {
         );
         return response.data.results;
     }
+
+    static async fetchWatchProviders(movieId) {
+        const response = await axios.get(
+            `${BASE_URL}movie/${movieId}/watch/providers?api_key=${import.meta.env.VITE_API_KEY_PARAM}`
+        );
+        return response.data.results;
+    }
 }

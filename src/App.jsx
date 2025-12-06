@@ -18,6 +18,7 @@ export function App() {
   const [recommendationList, setrecommendationList] = useState([]);
   const [currentTrailerId, setCurrentTrailerId] = useState(null);
   const [currentMode, setCurrentMode] = useState("tv");
+  const [watchProviders, setWatchProviders] = useState(null);
 
   async function fetchPopularFunc(mode = currentMode) {
     try {
@@ -76,6 +77,17 @@ export function App() {
     }
   }
 
+  async function fetchWatchProvidersFunc(tvShowId, mode = currentMode) {
+    try {
+      const api = mode === "tv" ? TVShowAPI : MovieAPI;
+      const providers = await api.fetchWatchProviders(tvShowId);
+      setWatchProviders(providers);
+    } catch (error) {
+      console.error("Unable to fetch watch providers:", error);
+      setWatchProviders(null);
+    }
+  }
+
   useEffect(() => {
     fetchPopularFunc(currentMode);
   }, [currentMode]);
@@ -83,6 +95,7 @@ export function App() {
   useEffect(() => {
     if (currentTVShow) {
       fetchRecommendationFunc(currentTVShow.id);
+      fetchWatchProvidersFunc(currentTVShow.id);
     }
   }, [currentTVShow]);
 
@@ -111,7 +124,7 @@ export function App() {
           </div>
           <div className="col-12 col-lg-8 d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
             <ModeToggle mode={currentMode} onToggle={setCurrentMode} />
-            <SearchBar onSubmit={fetchByTitleFunc}></SearchBar>
+            <SearchBar onSubmit={fetchByTitleFunc} mode={currentMode}></SearchBar>
           </div>
           <div className="col-12 col-lg-2">
             <Social></Social>
@@ -123,6 +136,7 @@ export function App() {
           <TvShowDetail
             tvShow={currentTVShow}
             onWatchTrailer={playTrailer}
+            watchProviders={watchProviders}
           ></TvShowDetail>
         )}
       </div>

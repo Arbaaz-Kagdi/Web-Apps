@@ -34,8 +34,14 @@
   background: transparent;
 }
 
-.watch_trailer_btn {
+.button_container {
+  display: flex;
+  gap: 15px;
   margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.watch_trailer_btn {
   padding: 10px 20px;
   background-color: white;
   color: black;

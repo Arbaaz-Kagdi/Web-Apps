@@ -1,7 +1,8 @@
 import s from "./style.module.css";
 import { StarRating } from "../StarRating/StarRating.jsx";
+import { WatchProviders } from "../WatchProviders/WatchProviders.jsx";
 
-export function TvShowDetail({ tvShow, onWatchTrailer }) {
+export function TvShowDetail({ tvShow, onWatchTrailer, watchProviders }) {
   const rating = tvShow.vote_average / 2;
   return (
     <div>
@@ -11,9 +12,12 @@ export function TvShowDetail({ tvShow, onWatchTrailer }) {
         <span className={s.rating}>{rating.toFixed(1)}/5</span>
       </div>
       <div className={s.overview}>{tvShow.overview}</div>
-      <button className={s.watch_trailer_btn} onClick={onWatchTrailer}>
-        Watch Trailer
-      </button>
+      <div className={s.button_container}>
+        <button className={s.watch_trailer_btn} onClick={onWatchTrailer}>
+          Trailer
+        </button>
+        <WatchProviders providers={watchProviders}></WatchProviders>
+      </div>
     </div>
   );
 }

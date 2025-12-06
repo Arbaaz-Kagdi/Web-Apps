@@ -1,0 +1,126 @@
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown_btn {
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropdown_btn:hover {
+    background-color: #ddd;
+}
+
+.icon {
+    margin-left: 4px;
+}
+
+.dropdown_menu {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 15px;
+    min-width: 250px;
+    max-width: 350px;
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown_menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown_menu::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.dropdown_menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.providers_list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.provider_section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.section_title {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.provider_item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.provider_item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.provider_logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.provider_name {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.no_providers {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+}

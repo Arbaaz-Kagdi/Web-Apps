@@ -32,4 +32,11 @@ export class TVShowAPI {
     );
     return response.data.results;
   }
+
+  static async fetchWatchProviders(tvShowId) {
+    const response = await axios.get(
+      `${BASE_URL}tv/${tvShowId}/watch/providers?api_key=${import.meta.env.VITE_API_KEY_PARAM}`
+    );
+    return response.data.results;
+  }
 }
