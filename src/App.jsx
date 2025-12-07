@@ -24,9 +24,12 @@ export function App() {
   const [backgroundVideoEnabled, setBackgroundVideoEnabled] = useState(
     () => {
       const saved = localStorage.getItem("backgroundVideoEnabled");
-      return saved === "true";
+      return saved !== "false";
     }
   );
+  const [hasTrailer, setHasTrailer] = useState(true);
+  const [showNoTrailerTooltip, setShowNoTrailerTooltip] = useState(false);
+  const [showNoVideoTooltip, setShowNoVideoTooltip] = useState(false);
 
   async function fetchPopularFunc(mode = currentMode) {
     try {
@@ -76,14 +79,19 @@ export function App() {
         );
         if (trailer) {
           setCurrentTrailerId(trailer.key);
+          setHasTrailer(true);
         } else {
-          alert("No trailer found for this show");
+          // Show tooltip for 2 seconds
+          setShowNoTrailerTooltip(true);
+          setTimeout(() => setShowNoTrailerTooltip(false), 2000);
         }
       } catch (error) {
-        alert("Unable to fetch trailer");
+        setShowNoTrailerTooltip(true);
+        setTimeout(() => setShowNoTrailerTooltip(false), 2000);
       }
     }
   }
+
 
   async function fetchWatchProvidersFunc(tvShowId, mode = currentMode) {
     try {
@@ -114,9 +122,49 @@ export function App() {
     }
   }
 
-  function handleBackgroundVideoToggle(enabled) {
-    setBackgroundVideoEnabled(enabled);
-    localStorage.setItem("backgroundVideoEnabled", enabled.toString());
+  async function handleBackgroundVideoToggle(enabled) {
+    if (enabled) {
+      // Check if there's a trailer available
+      try {
+        const api = currentMode === "tv" ? TVShowAPI : MovieAPI;
+        const videos = await api.fetchVideos(currentTVShow.id);
+        const trailer = videos.find(
+          (video) => video.type === "Trailer" && video.site === "YouTube"
+        );
+
+        if (trailer) {
+          // Trailer found, enable background video
+          setBackgroundVideoEnabled(true);
+          localStorage.setItem("backgroundVideoEnabled", "true");
+          setBackgroundVideoId(trailer.key);
+          setHasTrailer(true);
+        } else {
+          // No trailer found, keep it disabled and show background image
+          setBackgroundVideoEnabled(false);
+          localStorage.setItem("backgroundVideoEnabled", "false");
+          setBackgroundVideoId(null);
+          setHasTrailer(false);
+          // Show tooltip for 2 seconds
+          setShowNoVideoTooltip(true);
+          setTimeout(() => setShowNoVideoTooltip(false), 2000);
+        }
+      } catch (error) {
+        console.error("Unable to fetch trailer:", error);
+        // On error, disable background video and show background image
+        setBackgroundVideoEnabled(false);
+        localStorage.setItem("backgroundVideoEnabled", "false");
+        setBackgroundVideoId(null);
+        setHasTrailer(false);
+        // Show tooltip for 2 seconds
+        setShowNoVideoTooltip(true);
+        setTimeout(() => setShowNoVideoTooltip(false), 2000);
+      }
+    } else {
+      // Disable background video
+      setBackgroundVideoEnabled(false);
+      localStorage.setItem("backgroundVideoEnabled", "false");
+      setBackgroundVideoId(null);
+    }
   }
 
   useEffect(() => {
@@ -179,6 +227,8 @@ export function App() {
             watchProviders={watchProviders}
             backgroundVideoEnabled={backgroundVideoEnabled}
             onBackgroundVideoToggle={handleBackgroundVideoToggle}
+            showNoTrailerTooltip={showNoTrailerTooltip}
+            showNoVideoTooltip={showNoVideoTooltip}
           ></TvShowDetail>
         )}
       </div>
