@@ -42,49 +42,69 @@
 }
 
 .watch_trailer_btn {
-  padding: 10px 20px;
-  background-color: white;
-  color: black;
-  border: none;
-  border-radius: 5px;
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  backdrop-filter: blur(10px);
 }
 
 .watch_trailer_btn:hover {
-  background-color: #ddd;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.button_icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: invert(1);
 }
 
 .background_video_toggle {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
   cursor: pointer;
   user-select: none;
-  padding: 8px 12px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  transition: background-color 0.2s;
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: all 0.2s;
+  width: 48px;
+  height: 48px;
+  backdrop-filter: blur(10px);
 }
 
 .background_video_toggle:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .background_video_toggle input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  accent-color: white;
+  display: none;
 }
 
-.toggle_label {
-  font-size: 14px;
-  font-weight: 500;
-  color: white;
-  white-space: nowrap;
+.toggle_icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  transition: filter 0.2s;
+}
+
+.background_video_toggle input[type="checkbox"]:checked+.toggle_icon {
+  filter: invert(1);
 }

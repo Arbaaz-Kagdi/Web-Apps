@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "react-bootstrap-icons";
 import s from "./style.module.css";
+import platformsIcon from "../../assets/images/platforms-icon.png";
 
 const LOGO_BASE_URL = "https://image.tmdb.org/t/p/original";
 
@@ -31,7 +32,7 @@ export function WatchProviders({ providers }) {
     return (
         <div className={s.container}>
             <button className={s.dropdown_btn} onClick={toggleDropdown}>
-                Platforms
+                <img src={platformsIcon} alt="Platforms" className={s.button_icon} />
                 {isOpen ? (
                     <ChevronUp className={s.icon} size={16} />
                 ) : (

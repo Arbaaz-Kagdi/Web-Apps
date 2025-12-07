@@ -4,28 +4,40 @@
 }
 
 .dropdown_btn {
-    padding: 10px 20px;
-    background-color: white;
-    color: black;
-    border: none;
-    border-radius: 5px;
+    padding: 12px 16px;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
     font-weight: bold;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    gap: 4px;
+    height: 48px;
+    backdrop-filter: blur(10px);
 }
 
 .dropdown_btn:hover {
-    background-color: #ddd;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.button_icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: invert(1);
 }
 
 .icon {
-    margin-left: 4px;
+    margin-left: 0;
+    filter: invert(1);
 }
 
 .dropdown_menu {
