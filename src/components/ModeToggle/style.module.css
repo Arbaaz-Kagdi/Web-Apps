@@ -13,6 +13,7 @@
     font-weight: bold;
     font-size: 14px;
     color: white;
+    font-family: Roboto;
     transition: background-color 0.3s ease;
     white-space: nowrap;
     -webkit-font-smoothing: antialiased;

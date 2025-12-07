@@ -2,7 +2,7 @@ import s from "./style.module.css";
 import { StarRating } from "../StarRating/StarRating.jsx";
 import { WatchProviders } from "../WatchProviders/WatchProviders.jsx";
 
-export function TvShowDetail({ tvShow, onWatchTrailer, watchProviders }) {
+export function TvShowDetail({ tvShow, onWatchTrailer, watchProviders, backgroundVideoEnabled, onBackgroundVideoToggle }) {
   const rating = tvShow.vote_average / 2;
   return (
     <div>
@@ -17,6 +17,14 @@ export function TvShowDetail({ tvShow, onWatchTrailer, watchProviders }) {
           Trailer
         </button>
         <WatchProviders providers={watchProviders}></WatchProviders>
+        <label className={s.background_video_toggle}>
+          <input
+            type="checkbox"
+            checked={backgroundVideoEnabled}
+            onChange={(e) => onBackgroundVideoToggle(e.target.checked)}
+          />
+          <span className={s.toggle_label}>Background Video</span>
+        </label>
       </div>
     </div>
   );

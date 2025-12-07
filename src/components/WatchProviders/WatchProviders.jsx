@@ -31,7 +31,7 @@ export function WatchProviders({ providers }) {
     return (
         <div className={s.container}>
             <button className={s.dropdown_btn} onClick={toggleDropdown}>
-                Available Platforms
+                Platforms
                 {isOpen ? (
                     <ChevronUp className={s.icon} size={16} />
                 ) : (

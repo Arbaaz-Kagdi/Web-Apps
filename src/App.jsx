@@ -12,6 +12,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Social } from "./components/Social/Social.jsx";
 import { VideoPlayer } from "./components/VideoPlayer/VideoPlayer.jsx";
 import { ModeToggle } from "./components/ModeToggle/ModeToggle.jsx";
+import { BackgroundVideo } from "./components/BackgroundVideo/BackgroundVideo.jsx";
 
 export function App() {
   const [currentTVShow, setCurrentTVShow] = useState();
@@ -19,6 +20,13 @@ export function App() {
   const [currentTrailerId, setCurrentTrailerId] = useState(null);
   const [currentMode, setCurrentMode] = useState("tv");
   const [watchProviders, setWatchProviders] = useState(null);
+  const [backgroundVideoId, setBackgroundVideoId] = useState(null);
+  const [backgroundVideoEnabled, setBackgroundVideoEnabled] = useState(
+    () => {
+      const saved = localStorage.getItem("backgroundVideoEnabled");
+      return saved === "true";
+    }
+  );
 
   async function fetchPopularFunc(mode = currentMode) {
     try {
@@ -88,6 +96,29 @@ export function App() {
     }
   }
 
+  async function fetchBackgroundVideo(tvShowId, mode = currentMode) {
+    try {
+      const api = mode === "tv" ? TVShowAPI : MovieAPI;
+      const videos = await api.fetchVideos(tvShowId);
+      const trailer = videos.find(
+        (video) => video.type === "Trailer" && video.site === "YouTube"
+      );
+      if (trailer) {
+        setBackgroundVideoId(trailer.key);
+      } else {
+        setBackgroundVideoId(null);
+      }
+    } catch (error) {
+      console.error("Unable to fetch background video:", error);
+      setBackgroundVideoId(null);
+    }
+  }
+
+  function handleBackgroundVideoToggle(enabled) {
+    setBackgroundVideoEnabled(enabled);
+    localStorage.setItem("backgroundVideoEnabled", enabled.toString());
+  }
+
   useEffect(() => {
     fetchPopularFunc(currentMode);
   }, [currentMode]);
@@ -96,8 +127,13 @@ export function App() {
     if (currentTVShow) {
       fetchRecommendationFunc(currentTVShow.id);
       fetchWatchProvidersFunc(currentTVShow.id);
+      if (backgroundVideoEnabled) {
+        fetchBackgroundVideo(currentTVShow.id);
+      } else {
+        setBackgroundVideoId(null);
+      }
     }
-  }, [currentTVShow]);
+  }, [currentTVShow, backgroundVideoEnabled]);
 
   function updateCurrentTVShow(tvShow) {
     setCurrentTVShow(tvShow);
@@ -107,11 +143,15 @@ export function App() {
     <div
       className={s.main_container}
       style={{
-        background: currentTVShow
-          ? `linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("${BACKDROP_BASE_URL}${currentTVShow.backdrop_path}") no-repeat center / cover`
-          : "black",
+        background:
+          !backgroundVideoEnabled && currentTVShow
+            ? `linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("${BACKDROP_BASE_URL}${currentTVShow.backdrop_path}") no-repeat center / cover`
+            : "transparent",
       }}
     >
+      {backgroundVideoEnabled && backgroundVideoId && (
+        <BackgroundVideo videoId={backgroundVideoId} />
+      )}
       <Analytics></Analytics>
       <div className={s.header}>
         <div className="row">
@@ -137,6 +177,8 @@ export function App() {
             tvShow={currentTVShow}
             onWatchTrailer={playTrailer}
             watchProviders={watchProviders}
+            backgroundVideoEnabled={backgroundVideoEnabled}
+            onBackgroundVideoToggle={handleBackgroundVideoToggle}
           ></TvShowDetail>
         )}
       </div>
