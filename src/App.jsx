@@ -27,7 +27,6 @@ export function App() {
       return saved !== "false";
     }
   );
-  const [hasTrailer, setHasTrailer] = useState(true);
   const [showNoTrailerTooltip, setShowNoTrailerTooltip] = useState(false);
   const [showNoVideoTooltip, setShowNoVideoTooltip] = useState(false);
 
@@ -50,7 +49,10 @@ export function App() {
         tvShowId
       );
       if (recommendationListResp.length > 0) {
-        setrecommendationList(recommendationListResp.slice(0, 10));
+        const filteredList = recommendationListResp
+          .filter((item) => item.backdrop_path)
+          .slice(0, 10);
+        setrecommendationList(filteredList);
       }
     } catch (error) {
       alert("Unable to Get Recommended Shows");
@@ -79,7 +81,6 @@ export function App() {
         );
         if (trailer) {
           setCurrentTrailerId(trailer.key);
-          setHasTrailer(true);
         } else {
           // Show tooltip for 2 seconds
           setShowNoTrailerTooltip(true);
@@ -141,13 +142,11 @@ export function App() {
           setBackgroundVideoEnabled(true);
           localStorage.setItem("backgroundVideoEnabled", "true");
           setBackgroundVideoId(trailer.key);
-          setHasTrailer(true);
         } else {
           // No trailer found, keep it disabled and show background image
           setBackgroundVideoEnabled(false);
           localStorage.setItem("backgroundVideoEnabled", "false");
           setBackgroundVideoId(null);
-          setHasTrailer(false);
           // Show tooltip for 2 seconds
           setShowNoVideoTooltip(true);
           setTimeout(() => setShowNoVideoTooltip(false), 2000);
@@ -158,7 +157,6 @@ export function App() {
         setBackgroundVideoEnabled(false);
         localStorage.setItem("backgroundVideoEnabled", "false");
         setBackgroundVideoId(null);
-        setHasTrailer(false);
         // Show tooltip for 2 seconds
         setShowNoVideoTooltip(true);
         setTimeout(() => setShowNoVideoTooltip(false), 2000);
