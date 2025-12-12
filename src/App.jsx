@@ -115,10 +115,14 @@ export function App() {
         setBackgroundVideoId(trailer.key);
       } else {
         setBackgroundVideoId(null);
+        setBackgroundVideoEnabled(false);
+        localStorage.setItem("backgroundVideoEnabled", "false");
       }
     } catch (error) {
       console.error("Unable to fetch background video:", error);
       setBackgroundVideoId(null);
+      setBackgroundVideoEnabled(false);
+      localStorage.setItem("backgroundVideoEnabled", "false");
     }
   }
 
