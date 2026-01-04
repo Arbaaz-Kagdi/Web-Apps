@@ -29,6 +29,7 @@ export function App() {
   );
   const [showNoTrailerTooltip, setShowNoTrailerTooltip] = useState(false);
   const [showNoVideoTooltip, setShowNoVideoTooltip] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   async function fetchPopularFunc(mode = currentMode) {
     try {
@@ -61,13 +62,20 @@ export function App() {
 
   async function fetchByTitleFunc(title) {
     try {
-      const api = currentMode === "tv" ? TVShowAPI : MovieAPI;
-      const searchResponse = await api.fetchByTitle(title);
-      if (searchResponse.length > 0) {
-        setCurrentTVShow(searchResponse[0]);
-      }
+      setIsTransitioning(true);
+      // Wait for fade to black
+      setTimeout(async () => {
+        const api = currentMode === "tv" ? TVShowAPI : MovieAPI;
+        const searchResponse = await api.fetchByTitle(title);
+        if (searchResponse.length > 0) {
+          setCurrentTVShow(searchResponse[0]);
+        }
+        // Fade back in
+        setTimeout(() => setIsTransitioning(false), 250);
+      }, 250);
     } catch (error) {
       alert("Unable to Search");
+      setIsTransitioning(false);
     }
   }
 
@@ -186,7 +194,21 @@ export function App() {
   }, [currentTVShow, backgroundVideoEnabled]);
 
   function updateCurrentTVShow(tvShow) {
-    setCurrentTVShow(tvShow);
+    setIsTransitioning(true);
+    // Wait for fade to black
+    setTimeout(() => {
+      setCurrentTVShow(tvShow);
+      // Fade back in
+      setTimeout(() => setIsTransitioning(false), 250);
+    }, 250);
+  }
+
+  function resetToHome() {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      fetchPopularFunc(currentMode);
+      setTimeout(() => setIsTransitioning(false), 250);
+    }, 250);
   }
 
   return (
@@ -202,6 +224,10 @@ export function App() {
       {backgroundVideoEnabled && backgroundVideoId && (
         <BackgroundVideo videoId={backgroundVideoId} />
       )}
+      <div
+        className={`${s.transition_overlay} ${isTransitioning ? s.visible : ""
+          }`}
+      ></div>
       <Analytics></Analytics>
       <div className={s.header}>
         <div className="row">
@@ -210,6 +236,7 @@ export function App() {
               img={logoImg}
               title={"Watowatch"}
               subtitle={"Find a show you may like"}
+              onClick={resetToHome}
             ></Logo>
           </div>
           <div className="col-12 col-lg-8 d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">

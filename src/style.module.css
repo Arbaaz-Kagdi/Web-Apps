@@ -17,3 +17,21 @@
 .recommended_tv_shows {
   flex: 2;
 }
+
+.transition_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.transition_overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
