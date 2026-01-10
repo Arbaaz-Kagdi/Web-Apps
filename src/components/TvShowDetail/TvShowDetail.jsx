@@ -29,7 +29,7 @@ export function TvShowDetail({
             <img src={trailerIcon} alt="Trailer" className={s.button_icon} />
           </button>
         </Tooltip>
-        <WatchProviders providers={watchProviders}></WatchProviders>
+        <WatchProviders providers={watchProviders} title={tvShow.name || tvShow.title}></WatchProviders>
         <Tooltip message="No background video available" show={showNoVideoTooltip}>
           <label className={s.background_video_toggle}>
             <input
