@@ -1,19 +1,38 @@
 .container {
   cursor: pointer;
   position: relative;
+  width: 300px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
 }
 
 .img {
   border-radius: 10px;
+  width: 100%;
+  display: block;
 }
 
 .title {
   position: absolute;
-  margin-top: -40px;
-  height: 40px;
-  width: 300px;
-  padding-top: 8px;
-  background-color: rgba(0, 0, 0, 0.8);
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 15px 15px 15px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  box-sizing: border-box;
+
+  /* Typography */
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+  
+  /* Text truncation */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

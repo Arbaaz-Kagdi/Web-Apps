@@ -28,4 +28,5 @@
 
 .tv_show_item {
   margin-right: 20px;
+  flex-shrink: 0;
 }
