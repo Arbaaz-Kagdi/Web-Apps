@@ -13,3 +13,72 @@ body {
   background: rgba(0, 0, 0, 0.61);
   border-radius: 10px;
 }
+
+/* ── Global Toast Notification ── */
+.ww-toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  max-width: 400px;
+  min-width: 280px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  animation: ww-toast-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes ww-toast-in {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.ww-toast-success {
+  background: #1a1a1a;
+  color: #fff;
+  border-left: 4px solid #2ecc71;
+}
+
+.ww-toast-error {
+  background: #1a1a1a;
+  color: #fff;
+  border-left: 4px solid #e74c3c;
+}
+
+.ww-toast-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.ww-toast-success .ww-toast-icon { color: #2ecc71; }
+.ww-toast-error   .ww-toast-icon { color: #e74c3c; }
+
+.ww-toast-text {
+  flex: 1;
+  line-height: 1.45;
+  color: #fff;
+}
+
+.ww-toast-close {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 4px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.ww-toast-close:hover { color: #fff; }
+

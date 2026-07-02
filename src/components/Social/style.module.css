@@ -1,25 +1,36 @@
-.flexContainer {
+.contactContainer {
   display: flex;
-  gap: 20px;
   justify-content: flex-end;
+  align-items: center;
+  height: 100%;
 }
 
-.flexMobileContainer {
+.contactMobileContainer {
   display: flex;
-  gap: 20px;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
-.link {
-  font-size: 24px;
+.contactLink {
+  font-size: 1.1rem;
+  font-family: Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  padding: 5px 24px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease, color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.mail {
-  width: 35px;
-  height: 35px;
-}
-
-.gpay {
-  width: 35px;
-  height: 35px;
+.contactLink:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  text-decoration: none;
 }

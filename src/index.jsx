@@ -1,6 +1,7 @@
 import "./global.css";
 // Import some react tools
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 // Import our first component : App
 import { App } from "./App";
 // Target the root div
@@ -10,4 +11,8 @@ const rootDiv = document.getElementById("root");
 const reactRoot = ReactDOM.createRoot(rootDiv);
 
 // Inject our App component into the react node
-reactRoot.render(<App />);
+reactRoot.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);

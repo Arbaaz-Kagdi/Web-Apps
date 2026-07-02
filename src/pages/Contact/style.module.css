@@ -1,0 +1,383 @@
+.contactPageContainer {
+  min-height: 100vh;
+  background-color: #fafafa;
+  color: #1a1a1a;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding: 0 40px 60px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 40px;
+}
+
+.logoContainer {
+  /* Reusing the logo component scaling if necessary */
+}
+
+.logoContainer :global(.logo-title) {
+  color: #1a1a1a !important;
+}
+.logoContainer :global(.logo-subtitle) {
+  color: #666 !important;
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+}
+
+.navLink, .navLinkActive {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.navLinkActive {
+  color: #1a1a1a;
+}
+
+.navLink:hover {
+  color: #1a1a1a;
+}
+
+.mainContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.topSection {
+  display: flex;
+  gap: 60px;
+  margin-bottom: 80px;
+  align-items: stretch;
+}
+
+.textColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  margin: 0;
+  line-height: 1;
+}
+
+.subtitle {
+  max-width: 300px;
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 10px 0;
+}
+
+.contactForm {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.formRow {
+  display: flex;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.formGroup label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #888;
+}
+
+.formGroup input, .formGroup textarea {
+  border: none;
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 15px 20px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: background 0.2s;
+}
+
+.formGroup input:focus, .formGroup textarea:focus {
+  background: #ebebeb;
+}
+
+.submitBtn {
+  margin-top: 10px;
+  align-self: flex-start;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.submitBtn:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+.btnArrow {
+  background: rgba(255,255,255,0.2);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.imageColumn {
+  flex: 0.8;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.sideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Mobile-only illustration shown between title and form */
+.mobileImageColumn {
+  display: none;
+}
+
+.bottomSection {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 60px;
+}
+
+.infoCard {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.infoIcon {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+}
+
+.infoCard h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.infoCard p {
+  color: #666;
+  margin: 5px 0;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 992px) {
+  .topSection {
+    flex-direction: column;
+  }
+  .titleArea {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .formRow {
+    flex-direction: column;
+  }
+  .bottomSection {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .imageColumn {
+    height: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contactPageContainer {
+    padding: 0 16px 40px;
+  }
+  .header {
+    padding: 20px 0;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .title {
+    font-size: 2.4rem;
+  }
+  .subtitle {
+    max-width: 100%;
+  }
+  .contactForm {
+    padding: 24px 16px;
+  }
+  .topSection {
+    margin-bottom: 40px;
+    gap: 30px;
+  }
+  .bottomSection {
+    padding-top: 30px;
+    gap: 30px;
+  }
+  /* Hide the side image column on mobile */
+  .imageColumn {
+    display: none;
+  }
+  /* Show the inline mobile image between title and form */
+  .mobileImageColumn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 8px;
+  }
+  .mobileImageColumn img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+  }
+}
+
+/* ── Required field asterisk ── */
+.required {
+  color: #e74c3c;
+  margin-left: 2px;
+}
+
+/* ── Submit button sending state ── */
+.submitBtnSending {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+/* ── Spinner inside button ── */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Toast notification ── */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 22px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  max-width: 380px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  animation: slideIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+.toastSuccess {
+  background: #1a1a1a;
+  color: #fff;
+  border-left: 4px solid #2ecc71;
+}
+
+.toastError {
+  background: #1a1a1a;
+  color: #fff;
+  border-left: 4px solid #e74c3c;
+}
+
+.toastIcon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.toastSuccess .toastIcon {
+  color: #2ecc71;
+}
+
+.toastError .toastIcon {
+  color: #e74c3c;
+}
+
+.toastText {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.toastClose {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0 0 0 8px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.toastClose:hover {
+  color: #fff;
+}
