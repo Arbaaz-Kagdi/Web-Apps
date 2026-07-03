@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import s from './style.module.css';
 import { Logo } from '../../components/Logo/Logo.jsx';
-import logoImg from '../../assets/images/icons8-tv-60.png';
+// import logoImg from '../../assets/images/icons8-tv-60.png';
+import logoGif from "../../assets/images/home-logo.gif";
 import sideImage from '../../assets/images/contact_illustration.png';
 import { Telephone, Envelope, CheckCircleFill, XCircleFill } from 'react-bootstrap-icons';
 
@@ -90,7 +91,7 @@ export function Contact() {
         <div className={s.logoContainer}>
           <Link to="/" style={{ textDecoration: 'none' }}>
             <Logo
-              img={logoImg}
+              img={logoGif}
               title="Watowatch"
               subtitle="Find a show you may like"
               color="#1a1a1a"

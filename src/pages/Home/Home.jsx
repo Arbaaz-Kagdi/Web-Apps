@@ -5,7 +5,8 @@ import s from "../../style.module.css";
 import { BACKDROP_BASE_URL } from "../../config";
 import { TvShowDetail } from "../../components/TvShowDetail/TvShowDetail.jsx";
 import { Logo } from "../../components/Logo/Logo.jsx";
-import logoImg from "../../assets/images/icons8-tv-60.png";
+// import logoImg from "../../assets/images/icons8-tv-60.png";
+import logoGif from "../../assets/images/home-logo.gif";
 import { TVShowList } from "../../components/TVShowList/TVShowList.jsx";
 import { SearchBar } from "../../components/SearchBar/SearchBar.jsx";
 import { Analytics } from "@vercel/analytics/react";
@@ -232,7 +233,7 @@ export function Home() {
         <div className="row">
           <div className="col-12 col-lg-2 mb-3 mb-lg-0">
             <Logo
-              img={logoImg}
+              img={logoGif}
               title={"Watowatch"}
               subtitle={"Find a show you may like"}
               onClick={resetToHome}
