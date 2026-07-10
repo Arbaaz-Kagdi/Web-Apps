@@ -35,3 +35,15 @@
   opacity: 1;
   pointer-events: all;
 }
+
+.ui_container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.ui_hidden {
+  opacity: 0;
+  pointer-events: none;
+}

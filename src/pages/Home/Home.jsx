@@ -31,6 +31,7 @@ export function Home() {
   const [showNoTrailerTooltip, setShowNoTrailerTooltip] = useState(false);
   const [showNoVideoTooltip, setShowNoVideoTooltip] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isUIHidden, setIsUIHidden] = useState(false);
 
   async function fetchPopularFunc(mode = currentMode) {
     try {
@@ -179,6 +180,31 @@ export function Home() {
   }
 
   useEffect(() => {
+    let timeout;
+    const handleMouseMove = () => {
+      if (backgroundVideoEnabled) {
+        setIsUIHidden(false);
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          setIsUIHidden(true);
+        }, 3000);
+      }
+    };
+
+    if (backgroundVideoEnabled) {
+      window.addEventListener("mousemove", handleMouseMove);
+      timeout = setTimeout(() => setIsUIHidden(true), 3000);
+    } else {
+      setIsUIHidden(false);
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      clearTimeout(timeout);
+    };
+  }, [backgroundVideoEnabled]);
+
+  useEffect(() => {
     fetchPopularFunc(currentMode);
   }, [currentMode]);
 
@@ -223,51 +249,53 @@ export function Home() {
       }}
     >
       {backgroundVideoEnabled && backgroundVideoId && (
-        <BackgroundVideo videoId={backgroundVideoId} />
+        <BackgroundVideo videoId={backgroundVideoId} isUIHidden={isUIHidden} />
       )}
       <div
         className={`${s.transition_overlay} ${isTransitioning ? s.visible : ""
           }`}
       ></div>
-      <div className={s.header}>
-        <div className="row">
-          <div className="col-12 col-lg-2 mb-3 mb-lg-0">
-            <Logo
-              img={logoGif}
-              title={"Watowatch"}
-              subtitle={"Find a show you may like"}
-              onClick={resetToHome}
-            ></Logo>
-          </div>
-          <div className="col-12 col-lg-8 d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-            <ModeToggle mode={currentMode} onToggle={setCurrentMode} />
-            <SearchBar onSubmit={fetchByTitleFunc} mode={currentMode}></SearchBar>
-          </div>
-          <div className="col-12 col-lg-2 d-flex align-items-center justify-content-center justify-content-lg-end mt-3 mt-lg-0">
-            <Social></Social>
+      <div className={`${s.ui_container} ${isUIHidden ? s.ui_hidden : ""}`}>
+        <div className={s.header}>
+          <div className="row">
+            <div className="col-12 col-lg-2 mb-3 mb-lg-0">
+              <Logo
+                img={logoGif}
+                title={"Watowatch"}
+                subtitle={"Find a show you may like"}
+                onClick={resetToHome}
+              ></Logo>
+            </div>
+            <div className="col-12 col-lg-8 d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+              <ModeToggle mode={currentMode} onToggle={setCurrentMode} />
+              <SearchBar onSubmit={fetchByTitleFunc} mode={currentMode}></SearchBar>
+            </div>
+            <div className="col-12 col-lg-2 d-flex align-items-center justify-content-center justify-content-lg-end mt-3 mt-lg-0">
+              <Social></Social>
+            </div>
           </div>
         </div>
-      </div>
-      <div className={s.tv_show_detail}>
-        {currentTVShow && (
-          <TvShowDetail
-            tvShow={currentTVShow}
-            onWatchTrailer={playTrailer}
-            watchProviders={watchProviders}
-            backgroundVideoEnabled={backgroundVideoEnabled}
-            onBackgroundVideoToggle={handleBackgroundVideoToggle}
-            showNoTrailerTooltip={showNoTrailerTooltip}
-            showNoVideoTooltip={showNoVideoTooltip}
-          ></TvShowDetail>
-        )}
-      </div>
-      <div className={s.recommended_tv_shows}>
-        {currentTVShow && (
-          <TVShowList
-            onClickItem={updateCurrentTVShow}
-            tvShowList={recommendationList}
-          ></TVShowList>
-        )}
+        <div className={s.tv_show_detail}>
+          {currentTVShow && (
+            <TvShowDetail
+              tvShow={currentTVShow}
+              onWatchTrailer={playTrailer}
+              watchProviders={watchProviders}
+              backgroundVideoEnabled={backgroundVideoEnabled}
+              onBackgroundVideoToggle={handleBackgroundVideoToggle}
+              showNoTrailerTooltip={showNoTrailerTooltip}
+              showNoVideoTooltip={showNoVideoTooltip}
+            ></TvShowDetail>
+          )}
+        </div>
+        <div className={s.recommended_tv_shows}>
+          {currentTVShow && (
+            <TVShowList
+              onClickItem={updateCurrentTVShow}
+              tvShowList={recommendationList}
+            ></TVShowList>
+          )}
+        </div>
       </div>
       {currentTrailerId && (
         <VideoPlayer

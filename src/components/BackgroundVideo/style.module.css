@@ -45,4 +45,9 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.55);
     z-index: 1;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.overlay_hidden {
+    opacity: 0;
 }
