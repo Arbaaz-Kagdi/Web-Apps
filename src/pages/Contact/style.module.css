@@ -15,9 +15,9 @@
   margin-bottom: 40px;
 }
 
-.logoContainer {
-  /* Reusing the logo component scaling if necessary */
-}
+/* .logoContainer {
+  Reusing the logo component scaling if necessary
+} */
 
 .logoContainer :global(.logo-title) {
   color: #1a1a1a !important;
@@ -66,8 +66,6 @@
 }
 
 .titleArea {
-  /* display: flex; */
-  /* justify-content: space-between; */
   align-items: flex-end;
   margin-bottom: 40px;
 }
@@ -81,7 +79,6 @@
 }
 
 .subtitle {
-  /* max-width: 300px; */
   color: #666;
   font-size: 0.95rem;
   line-height: 1.5;
