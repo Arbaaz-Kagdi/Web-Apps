@@ -56,12 +56,12 @@ export function Contact() {
       .then(() => {
         setStatus('success');
         setFormData(INITIAL_FORM);
-        showToast('success', 'Message sent! We\'ll get back to you within 3 days. 🎉');
+        showToast('Success', 'Message sent! You will get a response withing 3 working days.');
       })
       .catch((err) => {
         console.error('EmailJS error:', err);
         setStatus('error');
-        showToast('error', 'Something went wrong. Please try again or email us directly.');
+        showToast('Error', 'Something went wrong. Please try again or email us directly.');
       })
       .finally(() => {
         setTimeout(() => setStatus(null), 3000);
@@ -112,7 +112,7 @@ export function Contact() {
             <div className={s.titleArea}>
               <h1 className={s.title}>Contact Us</h1>
               <p className={s.subtitle}>
-                Have a question or feedback? We'd love to hear from you.
+                We'd love to hear from you.
                 Send us a message and we'll respond within 3 days.
               </p>
             </div>

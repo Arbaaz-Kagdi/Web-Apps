@@ -66,8 +66,8 @@
 }
 
 .titleArea {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex; */
+  /* justify-content: space-between; */
   align-items: flex-end;
   margin-bottom: 40px;
 }
@@ -81,11 +81,11 @@
 }
 
 .subtitle {
-  max-width: 300px;
+  /* max-width: 300px; */
   color: #666;
   font-size: 0.95rem;
   line-height: 1.5;
-  margin: 0 0 10px 0;
+  margin: 10px 0 10px 0;
 }
 
 .contactForm {
