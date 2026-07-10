@@ -56,7 +56,7 @@ export function Contact() {
       .then(() => {
         setStatus('success');
         setFormData(INITIAL_FORM);
-        showToast('Success', 'Message sent! You will get a response withing 3 working days.');
+        showToast('Success', 'Message sent! You will get a response within 3 working days.');
       })
       .catch((err) => {
         console.error('EmailJS error:', err);
