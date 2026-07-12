@@ -19,7 +19,7 @@ export function SearchBar({ onSubmit, mode = "tv" }) {
 
   return (
     <div className={s.container}>
-      <SearchIcon size={27} className={s.icon}></SearchIcon>
+      <SearchIcon size={18} className={s.icon}></SearchIcon>
       <input
         className={s.input}
         type="text"
