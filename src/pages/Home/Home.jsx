@@ -268,7 +268,7 @@ export function Home() {
             </div>
             <div className="col-12 col-lg-8 d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
               <ModeToggle mode={currentMode} onToggle={setCurrentMode} />
-              <SearchBar onSubmit={fetchByTitleFunc} mode={currentMode}></SearchBar>
+              <SearchBar onSubmit={fetchByTitleFunc} mode={currentMode} onSuggestionSelect={updateCurrentTVShow}></SearchBar>
             </div>
             <div className="col-12 col-lg-2 d-flex align-items-center justify-content-center justify-content-lg-end mt-3 mt-lg-0">
               <Social></Social>
