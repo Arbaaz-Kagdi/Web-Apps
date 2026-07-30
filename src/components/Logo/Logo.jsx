@@ -12,7 +12,7 @@ export function Logo({ title, subtitle, img, onClick, color, subtitleColor }) {
           <img src={img} alt="Logo" className={s.img} />
           <div className={s.title} style={{ color: color }}>{title}</div>
         </div>
-        <div className={s.subtitle} style={{ color: subtitleColor }}>{subtitle}</div>
+        {subtitle && <div className={s.subtitle} style={{ color: subtitleColor }}>{subtitle}</div>}
       </div>
     </>
   );

@@ -1,8 +1,32 @@
 .starStyle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0px;
+  user-select: none;
+}
+
+.starsContainer {
   display: flex;
   align-items: center;
-  gap: 2px;
-  background-color: white;
-  padding: 5px 8px;
-  border-radius: 5px;
+  gap: 4px;
+  color: #ffc107; /* Golden yellow */
+  filter: drop-shadow(0 0 4px rgba(255, 193, 7, 0.4));
+}
+
+.ratingNumber {
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.ratingMax {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
 }

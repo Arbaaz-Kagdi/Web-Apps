@@ -20,7 +20,6 @@ export function TvShowDetail({
       <div className={s.title}>{tvShow.name || tvShow.title}</div>
       <div className={s.rating_container}>
         <StarRating rating={rating}></StarRating>
-        <span className={s.rating}>{rating.toFixed(1)}/5</span>
       </div>
       <div className={s.overview}>{tvShow.overview}</div>
       <div className={s.button_container}>

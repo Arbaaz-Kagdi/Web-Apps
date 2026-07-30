@@ -20,7 +20,7 @@ export function Home() {
   const [currentTVShow, setCurrentTVShow] = useState();
   const [recommendationList, setrecommendationList] = useState([]);
   const [currentTrailerId, setCurrentTrailerId] = useState(null);
-  const [currentMode, setCurrentMode] = useState("tv");
+  const [currentMode, setCurrentMode] = useState("movie");
   const [currentCategory, setCurrentCategory] = useState("All");
   const [watchProviders, setWatchProviders] = useState(null);
   const [backgroundVideoId, setBackgroundVideoId] = useState(null);
@@ -335,7 +335,6 @@ export function Home() {
               <Logo
                 img={logoGif}
                 title={"Watowatch"}
-                subtitle={"Find a show you may like"}
                 onClick={resetToHome}
               ></Logo>
             </div>
