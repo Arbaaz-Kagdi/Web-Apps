@@ -39,4 +39,11 @@ export class TVShowAPI {
     );
     return response.data.results;
   }
+
+  static async fetchByCategory(queryStr) {
+    const response = await axios.get(
+      `${BASE_URL}discover/tv?api_key=${import.meta.env.VITE_API_KEY_PARAM}${queryStr}`
+    );
+    return response.data.results;
+  }
 }

@@ -1,7 +1,7 @@
 .wrapper {
   position: relative;
   width: 100%;
-  z-index: 10;
+  z-index: 200;
 }
 
 @media (min-width: 992px) {

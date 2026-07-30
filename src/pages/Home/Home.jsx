@@ -13,6 +13,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Social } from "../../components/Social/Social.jsx";
 import { VideoPlayer } from "../../components/VideoPlayer/VideoPlayer.jsx";
 import { ModeToggle } from "../../components/ModeToggle/ModeToggle.jsx";
+import { CategoryDropdown } from "../../components/CategoryDropdown/CategoryDropdown.jsx";
 import { BackgroundVideo } from "../../components/BackgroundVideo/BackgroundVideo.jsx";
 
 export function Home() {
@@ -20,6 +21,7 @@ export function Home() {
   const [recommendationList, setrecommendationList] = useState([]);
   const [currentTrailerId, setCurrentTrailerId] = useState(null);
   const [currentMode, setCurrentMode] = useState("tv");
+  const [currentCategory, setCurrentCategory] = useState("All");
   const [watchProviders, setWatchProviders] = useState(null);
   const [backgroundVideoId, setBackgroundVideoId] = useState(null);
   const [backgroundVideoEnabled, setBackgroundVideoEnabled] = useState(
@@ -71,12 +73,80 @@ export function Home() {
         const searchResponse = await api.fetchByTitle(title);
         if (searchResponse.length > 0) {
           setCurrentTVShow(searchResponse[0]);
+          setCurrentCategory("All");
         }
         // Fade back in
         setTimeout(() => setIsTransitioning(false), 250);
       }, 250);
     } catch (error) {
       alert("Unable to Search");
+      setIsTransitioning(false);
+    }
+  }
+
+  const mapCategoryToQuery = (category, mode) => {
+    if (category === "All") return "";
+    
+    const genreMap = {
+        // TV Genres
+        "Action & Adventure": 10759,
+        "Animation": 16,
+        "Comedy": 35,
+        "Crime": 80,
+        "Documentary": 99,
+        "Drama": 18,
+        "Family": 10751,
+        "Kids": 10762,
+        "Mystery": 9648,
+        "News": 10763,
+        "Reality": 10764,
+        "Sci-Fi & Fantasy": 10765,
+        "Soap": 10766,
+        "Talk": 10767,
+        "War & Politics": 10768,
+        
+        // Movie Genres
+        "Action": 28,
+        "Adventure": 12,
+        "Fantasy": 14,
+        "History": 36,
+        "Horror": 27,
+        "Music": 10402,
+        "Romance": 10749,
+        "Science Fiction": 878,
+        "TV Movie": 10770,
+        "Thriller": 53,
+        "War": 10752,
+        "Western": 37
+    };
+
+    let query = "";
+    if (genreMap[category]) {
+        query += `&with_genres=${genreMap[category]}`;
+    }
+    return query;
+  };
+
+  async function fetchByCategoryFunc(category) {
+    setCurrentCategory(category);
+    if (category === "All") {
+      fetchPopularFunc(currentMode);
+      return;
+    }
+    
+    try {
+      setIsTransitioning(true);
+      setTimeout(async () => {
+        const api = currentMode === "tv" ? TVShowAPI : MovieAPI;
+        const query = mapCategoryToQuery(category, currentMode);
+        const list = await api.fetchByCategory(query);
+        if (list && list.length > 0) {
+          setCurrentTVShow(list[0]);
+        }
+        setTimeout(() => setIsTransitioning(false), 250);
+      }, 250);
+    } catch (error) {
+      alert("Unable to Get Content for Category");
       setIsTransitioning(false);
     }
   }
@@ -205,6 +275,7 @@ export function Home() {
   }, [backgroundVideoEnabled]);
 
   useEffect(() => {
+    setCurrentCategory("All");
     fetchPopularFunc(currentMode);
   }, [currentMode]);
 
@@ -225,6 +296,7 @@ export function Home() {
     // Wait for fade to black
     setTimeout(() => {
       setCurrentTVShow(tvShow);
+      setCurrentCategory("All");
       // Fade back in
       setTimeout(() => setIsTransitioning(false), 250);
     }, 250);
@@ -233,6 +305,7 @@ export function Home() {
   function resetToHome() {
     setIsTransitioning(true);
     setTimeout(() => {
+      setCurrentCategory("All");
       fetchPopularFunc(currentMode);
       setTimeout(() => setIsTransitioning(false), 250);
     }, 250);
@@ -266,9 +339,12 @@ export function Home() {
                 onClick={resetToHome}
               ></Logo>
             </div>
-            <div className="col-12 col-lg-8 d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-              <ModeToggle mode={currentMode} onToggle={setCurrentMode} />
+            <div className="col-12 col-lg-8 d-flex flex-column justify-content-center align-items-center gap-3">
               <SearchBar onSubmit={fetchByTitleFunc} mode={currentMode} onSuggestionSelect={updateCurrentTVShow}></SearchBar>
+              <div className="d-flex flex-row flex-wrap justify-content-center align-items-center gap-3 w-100 position-relative" style={{ zIndex: 100 }}>
+                <ModeToggle mode={currentMode} onToggle={setCurrentMode} />
+                <CategoryDropdown mode={currentMode} currentCategory={currentCategory} onCategorySelect={fetchByCategoryFunc} />
+              </div>
             </div>
             <div className="col-12 col-lg-2 d-flex align-items-center justify-content-center justify-content-lg-end mt-3 mt-lg-0">
               <Social></Social>
