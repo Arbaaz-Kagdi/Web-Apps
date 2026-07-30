@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown, ChevronUp } from "react-bootstrap-icons";
 import s from "./style.module.css";
 import platformsIcon from "../../assets/images/platforms-icon.png";
@@ -7,6 +7,10 @@ const LOGO_BASE_URL = "https://image.tmdb.org/t/p/original";
 
 export function WatchProviders({ providers, title }) {
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        setIsOpen(false);
+    }, [title, providers]);
 
     const getProviderLink = (providerName, showTitle) => {
         const name = providerName.toLowerCase();
