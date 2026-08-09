@@ -30,3 +30,18 @@
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
 }
+
+@media (max-width: 768px) {
+  .starsContainer svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .ratingNumber {
+    font-size: 14px;
+  }
+
+  .ratingMax {
+    font-size: 11px;
+  }
+}
