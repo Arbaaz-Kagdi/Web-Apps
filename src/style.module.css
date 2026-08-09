@@ -15,7 +15,6 @@
 }
 
 .recommended_tv_shows {
-  flex: 2;
 }
 
 .transition_overlay {
@@ -46,4 +45,12 @@
 .ui_hidden {
   opacity: 0;
   pointer-events: none;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  margin-top: 15px;
 }

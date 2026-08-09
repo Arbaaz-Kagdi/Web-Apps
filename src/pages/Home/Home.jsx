@@ -345,8 +345,7 @@ export function Home() {
                 <CategoryDropdown mode={currentMode} currentCategory={currentCategory} onCategorySelect={fetchByCategoryFunc} />
               </div>
             </div>
-            <div className="col-12 col-lg-2 d-flex align-items-center justify-content-center justify-content-lg-end mt-3 mt-lg-0">
-              <Social></Social>
+            <div className="col-12 col-lg-2">
             </div>
           </div>
         </div>
@@ -370,6 +369,14 @@ export function Home() {
               tvShowList={recommendationList}
             ></TVShowList>
           )}
+        </div>
+        <div className={s.footer}>
+          <div className="d-flex flex-column align-items-center gap-3">
+            <Social></Social>
+            <span style={{ color: "rgba(255, 255, 255, 0.6)", fontSize: "0.9rem" }}>
+              Copyright &copy; 2026 Arbaaz Kagdi
+            </span>
+          </div>
         </div>
       </div>
       {currentTrailerId && (

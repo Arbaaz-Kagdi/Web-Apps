@@ -8,7 +8,7 @@
   display: flex;
   width: 100%;
   overflow-x: auto;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
   -webkit-overflow-scrolling: touch;
   /* Smooth scrolling on iOS */
 }
